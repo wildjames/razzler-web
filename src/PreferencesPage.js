@@ -108,6 +108,18 @@ function PreferencesPage() {
     fetchPreferences();
   };
 
+  const snakeToCapitalized = (snake) => {
+    return snake
+      .split("_")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
+
+  const logout = () => {
+    localStorage.removeItem("razzler_login_token");
+    window.location.href = "/";
+  };
+
   return (
     <Container component="main" maxWidth="md">
       <Typography component="h1" variant="h5">
@@ -121,8 +133,9 @@ function PreferencesPage() {
             key={key}
             fullWidth
             margin="normal"
-            label={key}
+            label={snakeToCapitalized(key)}
             variant="outlined"
+            multiline
             value={preferences[key]}
             onChange={handleInputChange(key)}
           />
@@ -135,7 +148,12 @@ function PreferencesPage() {
           </Button>
         </Grid>
         <Grid item>
-          <Button onClick={handleReset} variant="contained" color="secondary">
+          <Button onClick={logout} variant="contained" color="secondary">
+            Logout
+          </Button>
+        </Grid>
+        <Grid item>
+          <Button onClick={handleReset} variant="contained" color="primary">
             Reset to Default
           </Button>
         </Grid>

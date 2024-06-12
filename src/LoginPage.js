@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Typography, TextField, Button } from "@mui/material";
 import { useSnackbar } from "notistack";
 
@@ -6,6 +6,17 @@ function LoginPage() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [otp, setOtp] = useState("");
   const { enqueueSnackbar } = useSnackbar();
+
+  const checkLoggedIn = () => {
+    const token = localStorage.getItem("razzler_login_token");
+    if (token) {
+      window.location.href = "/preferences";
+    }
+  };
+
+  useEffect(() => {
+    checkLoggedIn();
+  }, []);
 
   const handlePhoneSubmit = async (event) => {
     event.preventDefault();
@@ -22,8 +33,9 @@ function LoginPage() {
       const data = await response.json();
       console.log("OTP Request Response: ", data);
 
-      // TODO: Optionally handle the UI change here if needed
       enqueueSnackbar("OTP Sent", { variant: "success" });
+      // Focus the OTP input field
+      document.getElementById("otp").focus();
     } catch (error) {
       console.error("Error requesting OTP:", error);
       enqueueSnackbar("Failed to send OTP", { variant: "error" });
