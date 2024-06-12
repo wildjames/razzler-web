@@ -13,22 +13,34 @@ function App() {
       }}
       maxSnack={3}
     >
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-          margin: 0,
-        }}
-      >
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<LoginPage />} />
-            <Route path="/preferences" element={<PreferencesPage />} />
-          </Routes>
-        </BrowserRouter>
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "100vh",
+                  margin: 0,
+                }}
+              >
+                <LoginPage />
+              </div>
+            }
+          />
+          <Route
+            path="/preferences"
+            element={
+              <div className="preferencesContainer">
+                <PreferencesPage />
+              </div>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
     </SnackbarProvider>
   );
 }
