@@ -1,6 +1,8 @@
 import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
 import LoginPage from "./LoginPage";
+import PreferencesPage from "./PreferencesPage";
 
 function App() {
   return (
@@ -20,7 +22,12 @@ function App() {
           margin: 0,
         }}
       >
-        <LoginPage />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<LoginPage />} />
+            <Route path="/preferences" element={<PreferencesPage />} />
+          </Routes>
+        </BrowserRouter>
       </div>
     </SnackbarProvider>
   );

@@ -52,6 +52,11 @@ function LoginPage() {
       localStorage.setItem("razzler_login_token", token);
 
       enqueueSnackbar("Login successful!", { variant: "success" });
+
+      // Redirect to the preferences page after 1 second
+      setTimeout(() => {
+        window.location.href = "/preferences";
+      }, 1000);
     } catch (error) {
       console.error("Error verifying OTP:", error);
       enqueueSnackbar("Incorrect OTP.", { variant: "error" });
